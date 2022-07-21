@@ -42,7 +42,9 @@ export async function generatePDF({
   headerTemplate,
   footerTemplate,
 }: generatePDFOptions): Promise<void> {
-  const browser = await puppeteer.launch({ args: puppeteerArgs });
+  const browser = await puppeteer.launch({
+    args: [...puppeteerArgs, '--no-sandbox'],
+  });
   const page = await browser.newPage();
 
   for (const url of initialDocURLs) {
