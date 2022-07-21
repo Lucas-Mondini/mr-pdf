@@ -42,8 +42,12 @@ export async function generatePDF({
   headerTemplate,
   footerTemplate,
 }: generatePDFOptions): Promise<void> {
+  const args =
+    typeof puppeteerArgs == 'undefined'
+      ? ['--no-sandbox']
+      : [...puppeteerArgs, '--no-sandbox'];
   const browser = await puppeteer.launch({
-    args: [...puppeteerArgs, '--no-sandbox'],
+    args: args,
   });
   const page = await browser.newPage();
 
